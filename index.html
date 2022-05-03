@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Practica4 grupo26</title>
-
+        <title>Practica 3 - Grupo 26</title>
     </head>
     <body>
         <script>
@@ -14,10 +13,28 @@
             function init(){
              player = dashjs.MediaPlayerFactory.create( document.querySelector(".dashjsplayer"));
             };
-            </script>
-        <video class="dashjs-player" autoplay controls preload="auto">
-            <source src="https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd" type="application/dash+xml"/>
-        </video>
+        </script>
         <script src="node_modules\dashjs\dist\dash.all.min.js"></script>
+        <div style="display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;">
+            <h1 style="margin: 100px 20px 0px 0px;">P3 - Grupo 26</h1> 
+        </div>
+      
+        <div style="position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                background-color: #d4edb65c;">  
+            <video class="dashjs-player" autoplay controls preload="auto" style="width: 640px; height: 360px;">
+                <source src="https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd" type="application/dash+xml"/>
+            </video>
+        </div>
     </body>
 </html>
