@@ -2,7 +2,7 @@
 var tiempo = [0]
 var bitrate = [0];
 var buffer = [0];
-var recording = true; // Boolean que dice si recogemos o no valores
+var sampling_period = 1000; // Boolean que dice si recogemos o no valores
 
 
 var ctx = document.getElementById("statistics");
@@ -63,7 +63,7 @@ function newChart(){
                 display: true,
                 labelString: 'prueba',
                 title: {display:true,
-                        text: 'BitRate (    Kbps)'},
+                        text: 'BitRate (Kbps)'},
                 position: 'left',
             },
             y1: {
@@ -86,11 +86,12 @@ function newChart(){
 var myChart = newChart()
 
 var intervalId = setInterval(function() {
+        sampling_period = document.getElementById("sampling_period").value * 1000
         bitrate.push(parseFloat(document.getElementById("bitrate").innerHTML.replace(/\D/g,'')));
         buffer.push(parseFloat(document.getElementById("buffer").innerHTML.replace(/\D/g,'')) / 1000);
         tiempo.push(tiempo[tiempo.length - 1] + 1);
         myChart.update();
-}, 1000);
+}, sampling_period);
 
 
 function stopChart(){
@@ -101,18 +102,29 @@ function stopChart(){
     }
     else{
     intervalId = setInterval(function() {
+        indicated_sampling_period = document.getElementById("sampling_period").value * 1000
+        if (indicated_sampling_period != sampling_period){
+            sampling_period = indicated_sampling_period;
+            clearInterval(intervalId);
+            intervalId = setInterval(function() {
+                sampling_period = document.getElementById("sampling_period").value * 1000
+                bitrate.push(parseFloat(document.getElementById("bitrate").innerHTML.replace(/\D/g,'')));
+                buffer.push(parseFloat(document.getElementById("buffer").innerHTML.replace(/\D/g,'')) / 1000);
+                tiempo.push(tiempo[tiempo.length - 1] + sampling_period/1000);
+                myChart.update();
+                }, sampling_period);
+        }
         bitrate.push(parseFloat(document.getElementById("bitrate").innerHTML.replace(/\D/g,'')));
         buffer.push(parseFloat(document.getElementById("buffer").innerHTML.replace(/\D/g,'')) / 1000);
-        tiempo.push(tiempo[tiempo.length - 1] + 1);
+        tiempo.push(tiempo[tiempo.length - 1] + sampling_period/1000);
         myChart.update();
-    }, 1000);
+    }, sampling_period);
     recording = true;
     document.getElementById("pause").value = "Pause Graph";
     }
 }
 
 function clearChart(){
-    console.log('Hola')
     tiempo = [0]
     bitrate = [0];
     buffer = [0];

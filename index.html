@@ -50,6 +50,8 @@
 		<div style="display: 'grid' alignItems: 'center' justifyContent: 'center'">
 			<input type="button" onClick="clearChart()" value="Reset Graph">
 			<input type="button" id="pause" onClick="stopChart()" value="Pause Graph">
+			<span>Sampling period (First pause the graph)</span>
+			<input type="form" value="1" id="sampling_period">
 			<canvas id="statistics" width="780" height="500"></canvas>
 		</div>
 		<script src="graphics.js" ></script>
