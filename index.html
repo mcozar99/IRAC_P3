@@ -13,10 +13,18 @@
 				function init(){
 				var video,
 				player,
-				mpd_url = "./output/stream.mpd";
+				mpd_url = "./encryptedoutput/stream.mpd";
+				const protData = {
+					"org.w3.clearkey": {
+					"clearkeys": {
+					"oW5AK5BW43HzbTSKpiu3SQ": "hyN9IKGfWKdAwFaE5pm0qg"
+					}
+					}
+					};
 				video = document.querySelector("video");
 				player = dashjs.MediaPlayer().create();
 				player.initialize(video, mpd_url, true);
+				player.setProtectionData(protData);
 				player.on(dashjs.MediaPlayer.events["PLAYBACK_ENDED"], function() {
 				clearInterval(eventPoller);
 				});
