@@ -86,9 +86,9 @@ function newChart(){
 var myChart = newChart()
 
 var intervalId = setInterval(function() {
-        sampling_period = document.getElementById("sampling_period").value * 1000
+        sampling_period = document.getElementById("sampling_period").value * 1000;
         bitrate.push(parseFloat(document.getElementById("bitrate").innerHTML.replace(/\D/g,'')));
-        buffer.push(parseFloat(document.getElementById("buffer").innerHTML.replace(/\D/g,'')) / 1000);
+        buffer.push(document.getElementById("buffer").innerHTML.replace(/[^0-9.]/g, ''));
         tiempo.push(tiempo[tiempo.length - 1] + 1);
         myChart.update();
 }, sampling_period);
@@ -109,13 +109,13 @@ function stopChart(){
             intervalId = setInterval(function() {
                 sampling_period = document.getElementById("sampling_period").value * 1000
                 bitrate.push(parseFloat(document.getElementById("bitrate").innerHTML.replace(/\D/g,'')));
-                buffer.push(parseFloat(document.getElementById("buffer").innerHTML.replace(/\D/g,'')) / 1000);
+                buffer.push(document.getElementById("buffer").innerHTML.replace(/[^0-9.]/g, ''));
                 tiempo.push(tiempo[tiempo.length - 1] + sampling_period/1000);
                 myChart.update();
                 }, sampling_period);
         }
         bitrate.push(parseFloat(document.getElementById("bitrate").innerHTML.replace(/\D/g,'')));
-        buffer.push(parseFloat(document.getElementById("buffer").innerHTML.replace(/\D/g,'')) / 1000);
+        buffer.push(document.getElementById("buffer").innerHTML.replace(/[^0-9.]/g, ''));
         tiempo.push(tiempo[tiempo.length - 1] + sampling_period/1000);
         myChart.update();
     }, sampling_period);
