@@ -133,3 +133,27 @@ function clearChart(){
     clearInterval(intervalId);
     document.getElementById("pause").value = "Resume";
 }
+
+function transpose(a) {
+    return Object.keys(a[0]).map(function(c) {
+        return a.map(function(r) { return r[c]; });
+    });
+}
+
+function to_csv() {
+  const Results = transpose([tiempo, bitrate, buffer])
+  console.log(Results)
+  var CsvString = "time,bitrate,buffer\r\n"
+  Results.forEach(function(RowItem, RowIndex) {
+    RowItem.forEach(function(ColItem, ColIndex) {
+      CsvString += ColItem + ',';
+    });
+    CsvString += "\r\n";
+  });
+  CsvString = "data:application/csv," + encodeURIComponent(CsvString);
+  var x = document.createElement("A");
+  x.setAttribute("href", CsvString );
+  x.setAttribute("download", Date.now().toString() + ".csv");
+  document.body.appendChild(x);
+  x.click();
+}
