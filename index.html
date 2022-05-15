@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-        <title>Practica4 grupo26</title>
+        <title>Práctica 3 - Grupo 26</title>
     </head>
-    <body>
+    <body style="margin:0px">
         <script>
             document.addEventListener("DOMContentLoaded", function () {
 				init();
@@ -44,25 +44,38 @@
 				document.getElementById('representation').innerText = repSwitch.to;
 				}
 				}, 500);
-				}
-            </script>
-        <div class="code">
-			<video class="dashjs-player" autoplay controls preload="auto" muted>
-			</video>
+			}
+		</script>
+		<div style="
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                background-color: #e4edda5c;">
+			<h1 style="margin: 50px 20px 20px 0px;">P3 - Grupo 26</h1>
+			<div class="code" >
+				<video style="width: 640px; height: 360px;" class="dashjs-player" autoplay controls preload="auto" muted></video>
+			</div>
+			<div class="code">
+				<p>Video Bitrate: <span id="bitrate"></span> kbps</p>
+				<p>Video Buffer: <span id="buffer"></span> seconds</p>
+				<p>Video Representation: <span id="representation"></span></p>
+			</div>
+			<div style="display: flex; flex-direction:column; alignItems: center; justifyContent: center">
+				<span style="text-align: center; padding-bottom: 5px">Sampling period (First pause the graph)</span>
+				<input type="form" value="1" id="sampling_period">
+				<div style="margin: 20px">
+					<input type="button" onClick="clearChart()" value="Reset Graph">
+					<input type="button" id="pause" onClick="stopChart()" value="Pause Graph">
+					<input type="button" id="save" onClick="to_csv()" value="Download Data">
+				</div>
+			</div>
+			<div style="margin: 20px 0px 50px 0px">
+				<canvas id="statistics" width="780" height="500"></canvas>
+			</div>
 		</div>
-		<div class="code">
-			<p>Video Bitrate: <span id="bitrate"></span> kbps</p>
-			<p>Video Buffer: <span id="buffer"></span> seconds</p>
-			<p>Video Representation: <span id="representation"></span></p>
-		</div>
-		<div style="display: 'grid' alignItems: 'center' justifyContent: 'center'">
-			<input type="button" onClick="clearChart()" value="Reset Graph">
-			<input type="button" id="pause" onClick="stopChart()" value="Pause Graph">
-			<input type="button" id="save" onClick="to_csv()" value="Download Data">
-			<span>Sampling period (First pause the graph)</span>
-			<input type="form" value="1" id="sampling_period">
-			<canvas id="statistics" width="780" height="500"></canvas>
-		</div>
+
 		<script src="graphics.js" ></script>
         <script src="node_modules\dashjs\dist\dash.all.min.js"></script>
 	</body>
